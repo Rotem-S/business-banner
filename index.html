@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>רותם סתיו | ייעול תהליכים וארכיטקטורת AI לאדריכלות והנדסה</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+    }
+    .architectural-grid {
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(59, 110, 140, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(59, 110, 140, 0.06) 1px, transparent 1px);
+    }
+    .architectural-subgrid {
+      background-size: 12px 12px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    }
+    .silver-glass {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.84) 100%);
+      backdrop-filter: blur(16px);
+    }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spinSlow 28s linear infinite;
+    }
+    @keyframes clockHand {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .clock-hand-fast {
+      transform-origin: 50% 50%;
+      animation: clockHand 12s linear infinite;
+    }
+    .clock-hand-slow {
+      transform-origin: 50% 50%;
+      animation: clockHand 60s linear infinite;
+    }
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -24; }
+    }
+    .animate-dash {
+      animation: dashFlow 1.2s linear infinite;
+    }
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.35s ease-out forwards;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-100 via-zinc-100 to-slate-200 text-slate-900 selection:bg-[#3B6E8C] selection:text-white relative overflow-x-hidden">
+
+  <!-- Background Blueprint Overlays -->
+  <div class="fixed inset-0 architectural-grid pointer-events-none z-0"></div>
+  <div class="fixed inset-0 architectural-subgrid pointer-events-none z-0"></div>
+  <div class="fixed top-[-140px] right-[-100px] w-[550px] h-[550px] rounded-full bg-[#3B6E8C]/10 blur-[120px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[-180px] left-[-120px] w-[620px] h-[620px] rounded-full bg-white/90 blur-[110px] pointer-events-none z-0"></div>
+
+  <!-- 1. HERO SECTION -->
+  <section class="relative z-10 pt-14 pb-10 md:pt-20 md:pb-12">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 border border-slate-300/80 shadow-sm mb-5">
+            <svg class="w-3.5 h-3.5 text-[#3B6E8C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            <span class="text-xs sm:text-sm font-semibold text-[#3B6E8C] tracking-wide">אופטימיזציית תהליכים וארכיטקטורת AI</span>
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-[52px] font-light tracking-tight text-slate-900 leading-[1.15] mb-5">
+            אתם מתכננים פרויקטים. <br/>
+            <span class="font-bold text-slate-900">ה-AI מנווט את המידע</span><span class="text-[#3B6E8C] font-bold">.</span>
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed mb-7">
+            פחות שעות על חיפוש מסמכים, רגולציה ואקסלים — יותר זמן לתכנון, יצירה וצמיחה.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#contact" class="inline-flex items-center gap-3 bg-slate-900 hover:bg-[#3B6E8C] text-white font-medium text-base px-7 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+              <span>לתיאום פגישת היכרות</span>
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            </a>
+            <span class="text-sm text-slate-500 font-medium">
+              רותם סתיו | הנדסת תעשייה וניהול ופתרונות AI
+            </span>
+          </div>
+        </div>
+
+        <!-- Architectural Time & Efficiency Graphic -->
+        <div class="hidden md:flex items-center justify-center relative w-52 h-52 shrink-0">
+          <svg class="w-full h-full" viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="steelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f172a" />
+                <stop offset="100%" stop-color="#3B6E8C" />
+              </linearGradient>
+            </defs>
+            <!-- Outer Architectural Compass Ring -->
+            <circle cx="100" cy="100" r="90" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 6" class="animate-spin-slow" style="transform-origin: 100px 100px;" />
+            <circle cx="100" cy="100" r="76" fill="white" fill-opacity="0.7" stroke="#94a3b8" stroke-width="1.5" />
+            <!-- Clock Tick Marks -->
+            <g stroke="#64748b" stroke-width="2" stroke-linecap="round">
+              <line x1="100" y1="30" x2="100" y2="38" />
+              <line x1="170" y1="100" x2="162" y2="100" />
+              <line x1="100" y1="170" x2="100" y2="162" />
+              <line x1="30" y1="100" x2="38" y2="100" />
+            </g>
+            <!-- Speed Arc -->
+            <path d="M 100 36 A 64 64 0 0 1 164 100" fill="none" stroke="#3B6E8C" stroke-width="4" stroke-linecap="round" />
+            <!-- Animated Hands -->
+            <line x1="100" y1="100" x2="100" y2="52" stroke="#0f172a" stroke-width="3" stroke-linecap="round" class="clock-hand-slow" />
+            <line x1="100" y1="100" x2="142" y2="100" stroke="#3B6E8C" stroke-width="2.5" stroke-linecap="round" class="clock-hand-fast" />
+            <circle cx="100" cy="100" r="5" fill="#3B6E8C" />
+          </svg>
+          <div class="absolute -bottom-2 bg-slate-900 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md border border-slate-700">
+            זמן = תכנון נטו
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. INTERACTIVE 3-TAB SECTION -->
+  <section class="relative z-10 py-8">
+    <div class="max-w-5xl mx-auto px-6">
+      
+      <!-- 3 Selectable Pillar Tabs -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        
+        <!-- Tab 0: Work Process Cycle -->
+        <button onclick="switchTab(0)" id="tab-btn-0" class="tab-btn text-right p-5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-4 bg-slate-900 text-white border-slate-900 shadow-md scale-[1.01]">
+          <div id="tab-icon-0" class="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-colors bg-[#3B6E8C] text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-[#7ab8db] mb-0.5">01 / מתודולוגיה</div>
+            <h3 id="tab-title-0" class="text-base font-bold text-white">תהליך העבודה</h3>
+            <p id="tab-desc-0" class="text-xs text-slate-300 mt-0.5">מעגל שיפור מתמיד ולו״ז מדויק</p>
+          </div>
+        </button>
+
+        <!-- Tab 1: Conceptual AI Solutions -->
+        <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn text-right p-5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-4 silver-glass text-slate-800 border-slate-300/90 hover:border-[#3B6E8C]/60">
+          <div id="tab-icon-1" class="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-colors bg-slate-200/80 text-slate-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-[#3B6E8C] mb-0.5">02 / יישומי שטח</div>
+            <h3 id="tab-title-1" class="text-base font-bold text-slate-900">פתרונות AI למשרד</h3>
+            <p id="tab-desc-1" class="text-xs text-slate-600 mt-0.5">צ׳אט פרויקטלי, מכרזים ורגולציה</p>
+          </div>
+        </button>
+
+        <!-- Tab 2: Internal Tools & Control -->
+        <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn text-right p-5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-4 silver-glass text-slate-800 border-slate-300/90 hover:border-[#3B6E8C]/60">
+          <div id="tab-icon-2" class="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-colors bg-slate-200/80 text-slate-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-[#3B6E8C] mb-0.5">03 / שליטה להנהלה</div>
+            <h3 id="tab-title-2" class="text-base font-bold text-slate-900">כלים פנימיים ובקרה</h3>
+            <p id="tab-desc-2" class="text-xs text-slate-600 mt-0.5">תמונת מצב חיה במקום עשרות אקסלים</p>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- DISPLAY CONTAINER -->
+      <div class="silver-glass rounded-2xl border border-slate-300/90 shadow-lg p-6 sm:p-8">
+
+        <!-- ================= TAB 0: CONTINUOUS CYCLE ================= -->
+        <div id="panel-0" class="tab-panel active">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-slate-200/90">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-900">ממיפוי מהיר לאימפקט מדיד — במעגל מתמיד</h3>
+              <p class="text-sm text-slate-600 mt-0.5">תוצאות ראשונות תוך שבועות ספורים, ללא הפרעה לשגרת התכנון</p>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-xs font-semibold shrink-0">
+              <svg class="w-4 h-4 text-[#7ab8db]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Continuous Optimization Cycle</span>
+            </div>
+          </div>
+
+          <!-- Visual Cycle Flow with Clock Graphics -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative items-stretch">
+            
+            <!-- Step 1 -->
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm relative flex flex-col justify-between hover:border-[#3B6E8C] transition-colors">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="w-8 h-8 rounded-lg bg-slate-900 text-white font-bold text-sm flex items-center justify-center">01</span>
+                  <!-- Clock Badge 1.5 - 3 Weeks -->
+                  <div class="inline-flex items-center gap-1.5 bg-[#3B6E8C]/10 border border-[#3B6E8C]/30 text-[#3B6E8C] px-3 py-1 rounded-full text-xs font-bold">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>1.5 – 3 שבועות</span>
+                  </div>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">למידת העסק ומיפוי</h4>
+                <p class="text-sm text-slate-600 font-medium">היכרות עם שגרת המשרד, מיפוי זרימת המידע והערכת זמנים מדויקת.</p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-semibold">
+                <span>תוצר: מפת צווארי בקבוק</span>
+                <span class="text-[#3B6E8C]">← שלב 02</span>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm relative flex flex-col justify-between hover:border-[#3B6E8C] transition-colors">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="w-8 h-8 rounded-lg bg-[#3B6E8C] text-white font-bold text-sm flex items-center justify-center">02</span>
+                  <div class="inline-flex items-center gap-1.5 bg-slate-100 border border-slate-300 text-slate-700 px-3 py-1 rounded-full text-xs font-bold">
+                    <svg class="w-3.5 h-3.5 text-[#3B6E8C]" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/></svg>
+                    <span>מיקוד אימפקט מהיר</span>
+                  </div>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">זיהוי בעיות ליבה</h4>
+                <p class="text-sm text-slate-600 font-medium">איתור נקודות המפתח שבהן טכנולוגיה ו-AI יחסכו הכי הרבה זמן וכסף.</p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-semibold">
+                <span>תוצר: תוכנית פתרונות ממוקדת</span>
+                <span class="text-[#3B6E8C]">← שלב 03</span>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 shadow-md relative flex flex-col justify-between border border-slate-700">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="w-8 h-8 rounded-lg bg-[#3B6E8C] text-white font-bold text-sm flex items-center justify-center">03</span>
+                  <div class="inline-flex items-center gap-1.5 bg-[#3B6E8C]/30 border border-[#7ab8db]/40 text-[#7ab8db] px-3 py-1 rounded-full text-xs font-bold">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    <span>ROI מדיד בשטח</span>
+                  </div>
+                </div>
+                <h4 class="text-lg font-bold text-white mb-1">יישום ומדידת תוצאות</h4>
+                <p class="text-sm text-slate-300 font-normal">הטמעת הכלים בשטח, מדידת חיסכון בשעות עבודה, וחזרה למעגל השיפור.</p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-700/80 flex items-center justify-between text-xs text-[#7ab8db] font-semibold">
+                <span>תוצר: מערכת עובדת וחיסכון חי</span>
+                <span>↻ חזרה לשלב 01</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Cycle Loop Graphic Footer -->
+          <div class="mt-6 bg-slate-100/90 border border-slate-200/90 rounded-xl px-5 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-[#3B6E8C]/15 text-[#3B6E8C] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              </div>
+              <span class="text-sm font-bold text-slate-800">מעגל צמיחה מתמיד: כל פתרון שנמדד פותח דלת לייעול הבא במשרד.</span>
+            </div>
+            <span class="text-xs font-semibold text-[#3B6E8C] bg-white px-3 py-1 rounded-md border border-slate-200 shrink-0">אפס זעזועים לארגון</span>
+          </div>
+        </div>
+
+        <!-- ================= TAB 1: CONCEPTUAL AI SOLUTIONS ================= -->
+        <div id="panel-1" class="tab-panel">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-slate-200/90">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-900">כלים חכמים לתכנון, מכרזים ורגולציה</h3>
+              <p class="text-sm text-slate-600 mt-0.5">המידע הארגוני עובד בשביל האדריכלים ומנהלי הפרויקטים בשפה חופשית</p>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#3B6E8C]/15 text-[#3B6E8C] text-xs font-bold shrink-0">
+              <span>מותאם לעולמות התכנון והביצוע</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Concept 1: Project RAG Chat -->
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm hover:border-[#3B6E8C] transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-11 h-11 rounded-xl bg-slate-900 text-[#7ab8db] flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                  </div>
+                  <span class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Project AI Agent</span>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">צ׳אט-מומחה לכל פרויקט</h4>
+                <p class="text-xs font-bold text-[#3B6E8C] mb-3">זיכרון פרויקטלי מלא בשפה חופשית</p>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                  סוכן AI שלומד את כל ההיסטוריה, הפרוטוקולים, התוכניות והמיילים של הפרויקט. הצוות שואל ומקבל תשובה מיידית.
+                </p>
+              </div>
+              <div class="bg-slate-100/90 rounded-xl p-3 border border-slate-200/80 text-xs text-slate-700 italic">
+                ״מה סוכם מול יועץ האינסטלציה לגבי קומה 4?״ ← <strong class="not-italic text-slate-900">תשובה בשנייה</strong>
+              </div>
+            </div>
+
+            <!-- Concept 2: Vendor Bid Comparison -->
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm hover:border-[#3B6E8C] transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-11 h-11 rounded-xl bg-[#3B6E8C] text-white flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+                  </div>
+                  <span class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Smart Tenders</span>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">השוואת מכרזים וספקים</h4>
+                <p class="text-xs font-bold text-[#3B6E8C] mb-3">השוואת ״תפוחים לתפוחים״ אוטומטית</p>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                  מנגנון הקורא הצעות מחיר ומפרטים בפורמטים שונים, מנרמל סעיפים ומציף מיד פערים, חריגות או סעיפים חסרים.
+                </p>
+              </div>
+              <div class="bg-slate-100/90 rounded-xl p-3 border border-slate-200/80 text-xs text-slate-700 flex items-center justify-between">
+                <span>ניתוח כתבי כמויות והצעות</span>
+                <strong class="text-[#3B6E8C]">100% שקיפות</strong>
+              </div>
+            </div>
+
+            <!-- Concept 3: Regulatory AI Assistant -->
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm hover:border-[#3B6E8C] transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-11 h-11 rounded-xl bg-slate-900 text-[#7ab8db] flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                  </div>
+                  <span class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Regulation Radar</span>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">צ׳אט רגולציה והנחיות</h4>
+                <p class="text-xs font-bold text-[#3B6E8C] mb-3">מחובר לעדכוני עיריות וועדות תכנון</p>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                  בדיקה מיידית של תקנות חדשות, קווי בניין, תקני חניה וזכויות בנייה — ישירות מול פרסומי הרשויות.
+                </p>
+              </div>
+              <div class="bg-slate-100/90 rounded-xl p-3 border border-slate-200/80 text-xs text-slate-700 italic">
+                ״כמה חניות נדרשות לבניין של 40 דירות?״ ← <strong class="not-italic text-slate-900">בדיקה חיה</strong>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ================= TAB 2: INTERNAL TOOLS & CONTROL ================= -->
+        <div id="panel-2" class="tab-panel">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-slate-200/90">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-900">תמונת מצב ניהולית אחת במקום עשרות אקסלים</h3>
+              <p class="text-sm text-slate-600 mt-0.5">פיתוח מהיר של מערכות בקרה וכלי ניהול תפורים אישית לצרכי המשרד</p>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-xs font-semibold shrink-0">
+              <span>Single Source of Truth</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="w-11 h-11 rounded-xl bg-[#3B6E8C]/15 text-[#3B6E8C] flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">דשבורדים להנהלה</h4>
+                <p class="text-xs font-bold text-[#3B6E8C] mb-2">שליטה מלאה בזמן אמת</p>
+                <p class="text-sm text-slate-600">נראות מיידית של שעות תכנון, רווחיות פרויקטים, עומסי עבודה ועמידה ביעדים.</p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-100 text-xs font-bold text-slate-800">
+                ✓ החלטות מבוססות נתונים
+              </div>
+            </div>
+
+            <div class="bg-white/95 border border-slate-200/90 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="w-11 h-11 rounded-xl bg-[#3B6E8C]/15 text-[#3B6E8C] flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">מערכות תפורות אישית</h4>
+                <p class="text-xs font-bold text-[#3B6E8C] mb-2">בדיוק לפי שיטת העבודה שלכם</p>
+                <p class="text-sm text-slate-600">בניית פורטלים פנימיים למעקב משימות, סבבי אישורים ובקרת איכות תכנונית.</p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-100 text-xs font-bold text-slate-800">
+                ✓ סוף לעבודה ידנית כפולה
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 shadow-md border border-slate-700 flex flex-col justify-between">
+              <div>
+                <div class="w-11 h-11 rounded-xl bg-[#3B6E8C] text-white flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                </div>
+                <h4 class="text-lg font-bold text-white mb-1">חיבור מערכות אוטומטי</h4>
+                <p class="text-xs font-bold text-[#7ab8db] mb-2">גישור חכם בין תוכנות המשרד</p>
+                <p class="text-sm text-slate-300">סנכרון חלק של נתוני כספים, ניהול פרויקטים ודיווחי שעות למקור אמת אחד.</p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-700/80 text-xs font-bold text-[#7ab8db]">
+                ✓ אפס טעויות העתקה
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROVEN IMPACT METRICS (Short Slogans + Clock/Scale Icons) -->
+  <section class="relative z-10 py-10">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <div class="silver-glass p-6 rounded-xl border border-slate-300/90 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-[#3B6E8C]/15 text-[#3B6E8C] flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-[#3B6E8C]" dir="ltr">200-300+</div>
+            <div class="text-sm font-bold text-slate-900">שעות ידניות שנחסכו בחודש</div>
+            <div class="text-xs text-slate-500">אוטומציה של איסוף ובקרת מידע</div>
+          </div>
+        </div>
+
+        <div class="silver-glass p-6 rounded-xl border border-slate-300/90 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-slate-900 text-[#7ab8db] flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-900" dir="ltr">$200M+</div>
+            <div class="text-sm font-bold text-slate-900">תקציב מנוהל במערכת בקרה</div>
+            <div class="text-xs text-slate-500">פיתוח פלטפורמת תחזית מול ביצוע</div>
+          </div>
+        </div>
+
+        <div class="silver-glass p-6 rounded-xl border border-slate-300/90 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-[#3B6E8C]/15 text-[#3B6E8C] flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-900" dir="ltr">99.8%</div>
+            <div class="text-sm font-bold text-slate-900">דיוק ואמינות נתונים</div>
+            <div class="text-xs text-slate-500">מנועי אימות ובקרת איכות אוטומטיים</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EXECUTIVE CONTACT FOOTER -->
+  <footer id="contact" class="relative z-10 py-12 mt-4 border-t border-slate-300/90 bg-white/85 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        
+        <div>
+          <span class="text-xs font-bold text-[#3B6E8C] tracking-wide block mb-1">תיאום פגישת היכרות קצרה</span>
+          <h2 class="text-2xl font-bold text-slate-900">
+            רותם סתיו <span class="font-light text-slate-400 mx-1">|</span> <span class="text-base font-normal text-slate-600">B.Sc. הנדסת תעשייה וניהול</span>
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="https://wa.me/972542199249" target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-[#3B6E8C] hover:bg-slate-900 text-white px-4 py-2.5 rounded-lg transition-colors text-sm font-medium shadow-sm">
+            <span>שיחה בוואטסאפ</span>
+          </a>
+
+          <button onclick="copyText('054-2199249', 'phone-status')" class="flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-4 py-2.5 rounded-lg border border-slate-300 text-sm font-medium cursor-pointer">
+            <span dir="ltr">054-2199249</span>
+            <span id="phone-status" class="text-xs text-slate-400">העתק</span>
+          </button>
+
+          <button onclick="copyText('Rakov.rs@gmail.com', 'email-status')" class="flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-4 py-2.5 rounded-lg border border-slate-300 text-sm font-medium cursor-pointer">
+            <span>Rakov.rs@gmail.com</span>
+            <span id="email-status" class="text-xs text-slate-400">העתק</span>
+          </button>
+
+          <a href="https://www.linkedin.com/in/rotem-stav" target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-slate-900 hover:bg-[#3B6E8C] text-white px-4 py-2.5 rounded-lg transition-colors text-sm font-medium">
+            <span>LinkedIn</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Pure Vanilla JS (Works 100% offline & via double-click file://) -->
+  <script>
+    function switchTab(selectedIndex) {
+      for (let i = 0; i < 3; i++) {
+        const btn = document.getElementById('tab-btn-' + i);
+        const icon = document.getElementById('tab-icon-' + i);
+        const title = document.getElementById('tab-title-' + i);
+        const desc = document.getElementById('tab-desc-' + i);
+        const panel = document.getElementById('panel-' + i);
+
+        if (i === selectedIndex) {
+          btn.className = "tab-btn text-right p-5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-4 bg-slate-900 text-white border-slate-900 shadow-md scale-[1.01]";
+          icon.className = "w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-colors bg-[#3B6E8C] text-white";
+          title.className = "text-base font-bold text-white";
+          desc.className = "text-xs text-slate-300 mt-0.5";
+          panel.classList.add('active');
+        } else {
+          btn.className = "tab-btn text-right p-5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-4 silver-glass text-slate-800 border-slate-300/90 hover:border-[#3B6E8C]/60";
+          icon.className = "w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-colors bg-slate-200/80 text-slate-700";
+          title.className = "text-base font-bold text-slate-900";
+          desc.className = "text-xs text-slate-600 mt-0.5";
+          panel.classList.remove('active');
+        }
+      }
+    }
+
+    function copyText(text, statusId) {
+      navigator.clipboard.writeText(text);
+      const el = document.getElementById(statusId);
+      const original = el.innerText;
+      el.innerText = '✓ הועתק';
+      el.className = 'text-xs text-emerald-600 font-bold';
+      setTimeout(() => {
+        el.innerText = original;
+        el.className = 'text-xs text-slate-400';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
